@@ -1,5 +1,10 @@
 package com.project.booksoft.persistence.domain;
 
-public class ProjectBookmark {
+import javax.persistence.Entity;
 
+@Entity
+public class ProjectBookmark {
+	
+
+	
 }
