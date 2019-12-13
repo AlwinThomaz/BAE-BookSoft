@@ -16,8 +16,8 @@ public class Bookmark {
 	@GeneratedValue
 	private long id;
 	
-	@ManyToMany
-	Set<Project> chosenProjects;
+	@ManyToMany(mappedBy = "chosenBookmarks")
+	private Set<Project> chosenProjects;
 	
 	
 	@Column(name = "Type", unique=true, nullable = false)

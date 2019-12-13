@@ -42,6 +42,11 @@ private BookmarkService service;
 	public Bookmark getBookmark(@PathVariable Long id) throws BookmarkNotFoundException {
 		return this.service.findBookmarkByID(id);
 	}
+	
+	@GetMapping("/getBookmark/{type}")
+	public Bookmark getBookmark(@PathVariable String type) throws BookmarkNotFoundException {
+		return this.service.findBookmarkByType(type);
+	}
 
 	@GetMapping("/getAllBookmark")
 	public List<Bookmark> getAllBookmarks() {

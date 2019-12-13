@@ -37,6 +37,11 @@ private BookmarkRepo repo;
 				() -> new BookmarkNotFoundException());
 	}
 	
+	public Bookmark findBookmarkByType(String type) throws BookmarkNotFoundException {
+		return this.repo.findByType(type).orElseThrow(
+				() -> new BookmarkNotFoundException());
+	}
+	
 	public List<Bookmark> readBookmarks() {
 		return this.repo.findAll();
 	}

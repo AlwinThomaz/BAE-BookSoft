@@ -23,10 +23,10 @@ public class Project {
 			  name = "project_bookmark", 
 			  joinColumns = @JoinColumn(name = "project_id"), 
 			  inverseJoinColumns = @JoinColumn(name = "bookmark_id"))
-	Set<Bookmark> chosenbookmarks;
+	private Set<Bookmark> chosenBookmarks;
 	
 	
-	@Column(name = "Project_Name", length=50, nullable=false, unique=false)
+	@Column(name = "Name", length=50, nullable=false, unique=false)
 	private String name;
 	@Column(name = "Description", length=200, nullable=false, unique=false)
 	private String description;
