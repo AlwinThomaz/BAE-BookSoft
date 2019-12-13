@@ -38,12 +38,12 @@ private BookmarkService service;
 		this.service.deleteBookmark(id);
 	}
 	
-	@GetMapping("/get/{id}")
+	@GetMapping("/getBookmark/{id}")
 	public Bookmark getBookmark(@PathVariable Long id) throws BookmarkNotFoundException {
 		return this.service.findBookmarkByID(id);
 	}
 
-	@GetMapping("/getAll")
+	@GetMapping("/getAllBookmark")
 	public List<Bookmark> getAllBookmarks() {
 		return this.service.readBookmarks();
 	}

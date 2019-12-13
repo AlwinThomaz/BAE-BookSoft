@@ -29,8 +29,8 @@ public class ProjectController {
 		this.service = service;
 	}
 	@PostMapping("/createProject")
-	public Project createProject(@RequestBody Project project) {
-		return this.service.createProject(project);
+	public Project createProject(@RequestBody Project projectToAdd) {
+		return this.service.createProject(projectToAdd);
 	}
 
 	@DeleteMapping("/deleteProject/{id}")
@@ -38,14 +38,14 @@ public class ProjectController {
 		this.service.deleteProject(id);
 	}
 	
-	@GetMapping("/get/{id}")
+	@GetMapping("/getProject/{id}")
 	public Project getProject(@PathVariable Long id) throws ProjectNotFoundException {
 		return this.service.findProjectByID(id);
 	}
 
-	@GetMapping("/getAll")
+	@GetMapping("/getAllProjects")
 	public List<Project> getAllProjects() {
-		return this.service.readProjects();
+		return this.service.getAllProjects();
 	}
 
 	@PutMapping("/updateProject")

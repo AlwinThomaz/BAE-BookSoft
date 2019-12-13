@@ -48,6 +48,12 @@ private ProjectRepo repo;
 		return this.repo.save(toUpdate);
 	}
 
+	public List<Project> getAllProjects() {
+		{
+			return repo.findAll();
+		}
+	}
+
 }
 
 
