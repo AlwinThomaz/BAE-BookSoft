@@ -1,9 +1,13 @@
 package com.project.booksoft.persistence.domain;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
 
 @Entity
 public class Bookmark {
@@ -11,27 +15,34 @@ public class Bookmark {
 	@Id
 	@GeneratedValue
 	private long id;
-
-	@Column(name = "Name", unique = true)
+	
+	@ManyToMany
+	Set<Project> chosenProjects;
+	
+	
+	@Column(name = "Type", unique=true, nullable = false)
+	private String type;	
+	@Column(name = "Name",length=50, nullable=false, unique=false)
 	private String name;
-	@Column(name = "Type_of_resource", unique = true)
-	private String type;
-	@Column(name = "Description", unique = true)
+	@Column(name = "Description", length=200, nullable=false, unique=false)
 	private String description;
-	@Column(name = "URL", unique = true)
+	@Column(name = "URL", nullable=false, unique=true)
 	private String url;
 	
-	public Bookmark(String name, String type, String description, String url) {
+
+	public Bookmark(Set<Project> chosenProjects, String type, String name, String description, String url) {
 		super();
-		this.name = name;
+		this.chosenProjects = chosenProjects;
 		this.type = type;
+		this.name = name;
 		this.description = description;
 		this.url = url;
 	}
-	
+
 	public Bookmark() {
 	
 	}
+	
 
 	public long getId() {
 		return id;
@@ -41,12 +52,12 @@ public class Bookmark {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public Set<Project> getChosenProjects() {
+		return chosenProjects;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setChosenProjects(Set<Project> chosenProjects) {
+		this.chosenProjects = chosenProjects;
 	}
 
 	public String getType() {
@@ -55,6 +66,14 @@ public class Bookmark {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {
@@ -73,6 +92,7 @@ public class Bookmark {
 		this.url = url;
 	}
 	
+
 	@Override
 	public String toString() {
 		return "Bookmark [id=" + id + ", name=" + name + ", description=" + description + ", url=" + url+ "]";
@@ -82,6 +102,7 @@ public class Bookmark {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((chosenProjects == null) ? 0 : chosenProjects.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -99,6 +120,11 @@ public class Bookmark {
 		if (getClass() != obj.getClass())
 			return false;
 		Bookmark other = (Bookmark) obj;
+		if (chosenProjects == null) {
+			if (other.chosenProjects != null)
+				return false;
+		} else if (!chosenProjects.equals(other.chosenProjects))
+			return false;
 		if (description == null) {
 			if (other.description != null)
 				return false;
@@ -124,7 +150,8 @@ public class Bookmark {
 		return true;
 	}
 	
-	
-	
-	
 }
+	
+	
+
+	

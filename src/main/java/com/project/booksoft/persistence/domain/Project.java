@@ -1,9 +1,15 @@
 package com.project.booksoft.persistence.domain;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+
 
 @Entity
 public class Project {
@@ -12,9 +18,17 @@ public class Project {
 	@GeneratedValue
 	private long id;
 	
-	@Column(name = "Project_Name", unique = true)
+	@ManyToMany
+	@JoinTable(
+			  name = "project_bookmark", 
+			  joinColumns = @JoinColumn(name = "project_id"), 
+			  inverseJoinColumns = @JoinColumn(name = "bookmark_id"))
+	Set<Bookmark> chosenbookmarks;
+	
+	
+	@Column(name = "Project_Name", length=50, nullable=false, unique=false)
 	private String name;
-	@Column(name = "Description", unique = true)
+	@Column(name = "Description", length=200, nullable=false, unique=false)
 	private String description;
 	
 	public Project(String name, String description) {
