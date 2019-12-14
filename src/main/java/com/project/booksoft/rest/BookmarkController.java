@@ -40,7 +40,7 @@ private BookmarkService service;
 	
 	@GetMapping("/getBookmark/{id}")
 	public Bookmark getBookmark(@PathVariable Long id) throws BookmarkNotFoundException {
-		return this.service.findBookmarkByID(id);
+		return this.service.findBookmarkById(id);
 	}
 	
 	@GetMapping("/getBookmark/{type}")

@@ -35,7 +35,7 @@ public class ProjectServiceUnitTest {
 	
 	private Project testProject;
 	
-	private Project testProjectWithId;
+	private Project testProjectWithID;
 	
 	final long id = 1L;
 	
@@ -44,15 +44,15 @@ public class ProjectServiceUnitTest {
 		this.projectList = new ArrayList<>();
 		this.projectList.add(testProject);
 		this.testProject = new Project("Learn Java", "Resources to learn java");
-		this.testProjectWithId =new Project(testProject.getName(), testProject.getDescription());
-		this.testProjectWithId.setId(id);
+		this.testProjectWithID = new Project(testProject.getName(), testProject.getDescription());
+		this.testProjectWithID.setId(id);
 	}
 	
 	@Test
 	public void createProjectTest() {
-		when(this.repo.save(testProject)).thenReturn(testProjectWithId);
+		when(this.repo.save(testProject)).thenReturn(testProjectWithID);
 		
-		assertEquals(this.testProjectWithId, this.service.createProject(testProject));
+		assertEquals(this.testProjectWithID, this.service.createProject(testProject));
 		
 		verify(this.repo, times(1)).save(this.testProject);
 	}
@@ -69,11 +69,11 @@ public class ProjectServiceUnitTest {
 	
 	@Test
 	public void updateProjectTest() throws ProjectNotFoundException {
-		Project newProject = new Project("Learning java", "Resources to learn java");
+		Project newProject = new Project("Learn Python", "Resources to learn python");
 		Project updatedProject = new Project(newProject.getName(), newProject.getDescription());
 		updatedProject.setId(this.id);
 		
-		when(this.repo.findById(this.id)).thenReturn(Optional.of(this.testProjectWithId));
+		when(this.repo.findById(this.id)).thenReturn(Optional.of(this.testProjectWithID));
 		when(this.repo.save(updatedProject)).thenReturn(updatedProject);
 		
 		assertEquals(updatedProject, this.service.updateProject(updatedProject, this.id));
@@ -83,16 +83,16 @@ public class ProjectServiceUnitTest {
 	}
 	
 	@Test
-	public void findProjectById() throws ProjectNotFoundException {
-		when(this.repo.findById(id)).thenReturn(Optional.of(this.testProjectWithId));
+	public void findProjectsByIDTest() throws ProjectNotFoundException {
+		when(this.repo.findById(id)).thenReturn(Optional.of(this.testProjectWithID));
 		
-		assertEquals(this.testProjectWithId, this.service.findProjectByID(this.id));
+		assertEquals(this.testProjectWithID, this.service.findProjectById(this.id));
 		
 		verify(this.repo, times(1)).findById(this.id);
 	}
 	
 	@Test
-	public void findAllProjects() {
+	public void findAllProjectsTest() {
 		when(repo.findAll()).thenReturn(this.projectList);
 		
 		assertFalse("Controller has found no projects", this.service.readProjects().isEmpty());

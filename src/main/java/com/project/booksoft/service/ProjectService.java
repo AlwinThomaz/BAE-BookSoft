@@ -32,7 +32,7 @@ private ProjectRepo repo;
 		return this.repo.existsById(id);
 	}
 	
-	public Project findProjectByID(Long id) throws ProjectNotFoundException {
+	public Project findProjectById(Long id) throws ProjectNotFoundException {
 		return this.repo.findById(id).orElseThrow(
 				() -> new ProjectNotFoundException());
 	}
@@ -42,7 +42,7 @@ private ProjectRepo repo;
 	}
 
 	public Project updateProject(Project project, Long id) throws ProjectNotFoundException {
-		Project toUpdate = findProjectByID(id);
+		Project toUpdate = findProjectById(id);
 		toUpdate.setName(project.getName());
 		toUpdate.setDescription(project.getDescription());
 		return this.repo.save(toUpdate);

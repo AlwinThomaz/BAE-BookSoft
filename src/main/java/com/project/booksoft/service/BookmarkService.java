@@ -33,7 +33,7 @@ private BookmarkRepo repo;
 		return this.repo.existsById(id);
 	}
 	
-	public Bookmark findBookmarkByID(Long id) throws BookmarkNotFoundException {
+	public Bookmark findBookmarkById(Long id) throws BookmarkNotFoundException {
 		return this.repo.findById(id).orElseThrow(
 				() -> new BookmarkNotFoundException());
 	}
@@ -48,7 +48,7 @@ private BookmarkRepo repo;
 	}
 
 	public Bookmark updateBookmark(Bookmark bookmark, Long id) throws BookmarkNotFoundException {
-		Bookmark toUpdate = findBookmarkByID(id);
+		Bookmark toUpdate = findBookmarkById(id);
 		toUpdate.setType(bookmark.getType());
 		toUpdate.setName(bookmark.getName());
 		toUpdate.setDescription(bookmark.getDescription());

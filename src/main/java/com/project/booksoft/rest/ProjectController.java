@@ -40,7 +40,7 @@ public class ProjectController {
 	
 	@GetMapping("/getProject/{id}")
 	public Project getProject(@PathVariable Long id) throws ProjectNotFoundException {
-		return this.service.findProjectByID(id);
+		return this.service.findProjectById(id);
 	}
 
 	@GetMapping("/getAllProjects")
