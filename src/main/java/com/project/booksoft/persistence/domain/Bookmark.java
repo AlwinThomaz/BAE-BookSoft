@@ -30,9 +30,7 @@ public class Bookmark {
 	private String url;
 	
 
-	public Bookmark(Set<Project> chosenProjects, String type, String name, String description, String url) {
-		super();
-		this.chosenProjects = chosenProjects;
+	public Bookmark(String type, String name, String description, String url) {
 		this.type = type;
 		this.name = name;
 		this.description = description;
@@ -43,7 +41,6 @@ public class Bookmark {
 	
 	}
 	
-
 	public long getId() {
 		return id;
 	}
