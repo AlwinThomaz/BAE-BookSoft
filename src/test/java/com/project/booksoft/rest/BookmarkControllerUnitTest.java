@@ -11,14 +11,16 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.project.booksoft.exceptions.BookmarkNotFoundException;
 import com.project.booksoft.persistence.domain.Bookmark;
 import com.project.booksoft.service.BookmarkService;
 
-
+@RunWith(SpringRunner.class)
 public class BookmarkControllerUnitTest {
 	
 
@@ -85,7 +87,7 @@ public class BookmarkControllerUnitTest {
 	}
 
 	@Test
-	public void findAllBookmarksTest() {
+	public void getAllBookmarksTest() {
 
 		when(service.readBookmarks()).thenReturn(this.bookmarkList);
 

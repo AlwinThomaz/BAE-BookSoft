@@ -19,9 +19,9 @@ public class ProjectRepoTest {
 	@Autowired
 	private ProjectRepo repo;
 	
-	private final String TEST_DESCRIPTION = "Resources to learn java";
+	private final String TEST_NAME = "Learn Java";
 	
-	private final Project TEST_PROJECT = new Project("Java", TEST_DESCRIPTION);
+	private final Project TEST_PROJECT = new Project(TEST_NAME, "Resources to learn java");
 	
 	private Project testSavedProject;
 	
@@ -33,7 +33,7 @@ public class ProjectRepoTest {
 	
 	@Test
 	public void testFindByName() {
-		assertThat(this.repo.findByDescription(this.TEST_DESCRIPTION)).containsExactly(this.testSavedProject);
+		assertThat(this.repo.findByName(this.TEST_NAME)).containsExactly(this.testSavedProject);
 	}
 }
 

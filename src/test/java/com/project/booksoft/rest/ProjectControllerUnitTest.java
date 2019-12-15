@@ -11,14 +11,16 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.project.booksoft.exceptions.ProjectNotFoundException;
 import com.project.booksoft.persistence.domain.Project;
 import com.project.booksoft.service.ProjectService;
 
-
+@RunWith(SpringRunner.class)
 public class ProjectControllerUnitTest {
 	
 

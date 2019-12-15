@@ -9,6 +9,6 @@ import com.project.booksoft.persistence.domain.Project;
 
 public interface ProjectRepo extends JpaRepository<Project, Long> {
 
-	List<Project> findByDescription(String description);
+	List<Project> findByName(String name);
 
 }
