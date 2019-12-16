@@ -22,7 +22,6 @@ import com.project.booksoft.service.ProjectService;
 
 @RunWith(SpringRunner.class)
 public class ProjectControllerUnitTest {
-	
 
 	@InjectMocks
 	private ProjectController controller;
@@ -37,14 +36,14 @@ public class ProjectControllerUnitTest {
 	private Project testProjectWithID;
 
 	final long id = 1L;
-	
+
 	@Before
 	public void init() {
 		this.projectList = new ArrayList<>();
-		this.projectList.add(testProject);
 		this.testProject = new Project("Learn Java", "Resources to learn java");
 		this.testProjectWithID = new Project(testProject.getName(), testProject.getDescription());
 		this.testProjectWithID.setId(id);
+		this.projectList.add(testProject);
 	}
 
 	@Test
@@ -62,10 +61,10 @@ public class ProjectControllerUnitTest {
 
 		verify(this.service, times(1)).deleteProject(id);
 	}
-	
+
 	@Test
 	public void updateProjectTest() throws ProjectNotFoundException {
-		
+
 		Project newProject = new Project("Learn Python", "Resources to learn python");
 		Project updatedProject = new Project(newProject.getName(), newProject.getDescription());
 		updatedProject.setId(this.id);
@@ -87,17 +86,13 @@ public class ProjectControllerUnitTest {
 	}
 
 	@Test
-	public void findAllProjectsTest() {
+	public void getAllProjectsTest() {
 
-		when(service.readProjects()).thenReturn(this.projectList);
+		when(service.getAllProjects()).thenReturn(this.projectList);
 
 		assertFalse("Controller has found no projects", this.controller.getAllProjects().isEmpty());
 
-		verify(service, times(1)).readProjects();
+		verify(service, times(1)).getAllProjects();
 	}
 
-	
 }
-
-
-

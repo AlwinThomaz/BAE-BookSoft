@@ -49,9 +49,9 @@ private ProjectRepo repo;
 	}
 
 	public List<Project> getAllProjects() {
-		{
-			return repo.findAll();
-		}
+		
+			return this.repo.findAll();
+		
 	}
 
 }
