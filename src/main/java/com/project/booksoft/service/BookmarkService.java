@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.booksoft.exceptions.BookmarkNotFoundException;
 import com.project.booksoft.persistence.domain.Bookmark;
+import com.project.booksoft.persistence.domain.Project;
 import com.project.booksoft.persistence.repo.BookmarkRepo;
 
 
@@ -14,12 +15,14 @@ import com.project.booksoft.persistence.repo.BookmarkRepo;
 @Service
 public class BookmarkService {
 
+@Autowired
 private BookmarkRepo repo;
 	
-	@Autowired
+	
 	public BookmarkService(BookmarkRepo repo) {
 		this.repo = repo;
 	}
+	
 	
 	public Bookmark createBookmark(Bookmark bookmark) {
 		return this.repo.save(bookmark);
@@ -38,13 +41,13 @@ private BookmarkRepo repo;
 				() -> new BookmarkNotFoundException());
 	}
 	
-	public Bookmark findBookmarkByType(String type) throws BookmarkNotFoundException {
-		return this.repo.findByType(type).orElseThrow(
-				() -> new BookmarkNotFoundException());
-	}
 	
 	public List<Bookmark> readBookmarks() {
 		return this.repo.findAll();
+	}
+	
+	public List<Bookmark> findBookmarkByType(String type) {
+		return this.repo.findByType(type);
 	}
 
 	public Bookmark updateBookmark(Bookmark bookmark, Long id) throws BookmarkNotFoundException {
@@ -55,6 +58,9 @@ private BookmarkRepo repo;
 		toUpdate.setUrl(bookmark.getUrl());
 		return this.repo.save(toUpdate);
 	}
+
+	
+	
 
 }
 

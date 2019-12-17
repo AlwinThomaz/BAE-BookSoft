@@ -33,6 +33,6 @@ public class BookmarkRepoTest {
 	
 	@Test
 	public void testFindByName() {
-		assertThat(this.repo.findByType(this.TEST_TYPE)).containsSame(this.testSavedBookmark);
+		assertThat(this.repo.findByType(this.TEST_TYPE)).containsExactly(this.testSavedBookmark);
 	}
 }

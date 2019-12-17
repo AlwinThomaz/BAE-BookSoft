@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.booksoft.exceptions.BookmarkNotFoundException;
+import com.project.booksoft.exceptions.TypeNotFoundException;
 import com.project.booksoft.persistence.domain.Bookmark;
 import com.project.booksoft.service.BookmarkService;
 
@@ -21,13 +22,15 @@ import com.project.booksoft.service.BookmarkService;
 @RestController
 public class BookmarkController {
 	
-private BookmarkService service;
-	
 	@Autowired
-	public BookmarkController(BookmarkService service) {
-		super();
-		this.service = service;
-	}
+	private BookmarkService service;
+	
+//	@Autowired
+//	public BookmarkController(BookmarkService service) {
+//		super();
+//		this.service = service;
+//	}
+	
 	@PostMapping("/createBookmark")
 	public Bookmark createBookmark(@RequestBody Bookmark bookmark) {
 		return this.service.createBookmark(bookmark);
@@ -44,7 +47,7 @@ private BookmarkService service;
 	}
 	
 	@GetMapping("/getBookmark/{type}")
-	public Bookmark getBookmark(@PathVariable String type) throws BookmarkNotFoundException {
+	public List<Bookmark> getBookmarkByType(@PathVariable String type) throws TypeNotFoundException {
 		return this.service.findBookmarkByType(type);
 	}
 

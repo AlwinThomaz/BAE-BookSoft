@@ -1,12 +1,13 @@
 package com.project.booksoft.persistence.domain;
 
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 
 
 @Entity
@@ -16,11 +17,12 @@ public class Bookmark {
 	@GeneratedValue
 	private long id;
 	
-	@ManyToMany(mappedBy = "chosenBookmarks")
-	private Set<Project> chosenProjects;
+	@ManyToOne
+    @JoinColumn(name="project_id", nullable=true)
+    private Project project;
 	
 	
-	@Column(name = "Type", unique=true, nullable = false)
+	@Column(name = "Type", nullable = false)
 	private String type;	
 	@Column(name = "Name",length=50, nullable=false, unique=false)
 	private String name;
@@ -41,20 +43,20 @@ public class Bookmark {
 	
 	}
 	
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
 	public long getId() {
 		return id;
 	}
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public Set<Project> getChosenProjects() {
-		return chosenProjects;
-	}
-
-	public void setChosenProjects(Set<Project> chosenProjects) {
-		this.chosenProjects = chosenProjects;
 	}
 
 	public String getType() {
@@ -99,7 +101,6 @@ public class Bookmark {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((chosenProjects == null) ? 0 : chosenProjects.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -117,11 +118,6 @@ public class Bookmark {
 		if (getClass() != obj.getClass())
 			return false;
 		Bookmark other = (Bookmark) obj;
-		if (chosenProjects == null) {
-			if (other.chosenProjects != null)
-				return false;
-		} else if (!chosenProjects.equals(other.chosenProjects))
-			return false;
 		if (description == null) {
 			if (other.description != null)
 				return false;
@@ -146,7 +142,7 @@ public class Bookmark {
 			return false;
 		return true;
 	}
-	
+
 }
 	
 	

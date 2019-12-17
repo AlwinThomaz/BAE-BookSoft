@@ -1,14 +1,15 @@
 package com.project.booksoft.persistence.domain;
 
-import java.util.Set;
+import java.util.List;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.JoinColumn;
+
+import javax.persistence.OneToMany;
+
 
 
 @Entity
@@ -18,12 +19,8 @@ public class Project {
 	@GeneratedValue
 	private long id;
 	
-	@ManyToMany
-	@JoinTable(
-			  name = "project_bookmark", 
-			  joinColumns = @JoinColumn(name = "project_id"), 
-			  inverseJoinColumns = @JoinColumn(name = "bookmark_id"))
-	private Set<Bookmark> chosenBookmarks;
+	@OneToMany(mappedBy="project")
+	private List<Bookmark> bookmarks;
 	
 	
 	@Column(name = "Name", length=50, nullable=false, unique=false)
@@ -39,6 +36,15 @@ public class Project {
 	
 	public Project() {
 		
+	}
+	
+
+	public List<Bookmark> getBookmarks() {
+		return bookmarks;
+	}
+
+	public void setBookmarks(List<Bookmark> bookmarks) {
+		this.bookmarks = bookmarks;
 	}
 
 	public long getId() {
@@ -74,6 +80,7 @@ public class Project {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((bookmarks == null) ? 0 : bookmarks.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -89,6 +96,11 @@ public class Project {
 		if (getClass() != obj.getClass())
 			return false;
 		Project other = (Project) obj;
+		if (bookmarks == null) {
+			if (other.bookmarks != null)
+				return false;
+		} else if (!bookmarks.equals(other.bookmarks))
+			return false;
 		if (description == null) {
 			if (other.description != null)
 				return false;
